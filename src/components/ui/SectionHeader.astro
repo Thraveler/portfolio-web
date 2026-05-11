@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<div class="mb-12 text-center">
+  <h2 class="font-heading text-3xl font-bold text-[var(--color-text)] md:text-4xl">
+    {title}
+  </h2>
+  <!-- Gold ornamental divider -->
+  <div class="mt-3 flex items-center justify-center gap-3">
+    <span class="h-px w-16 bg-[var(--color-accent-gold)]"></span>
+    <span class="text-[var(--color-accent-gold)]">✦</span>
+    <span class="h-px w-16 bg-[var(--color-accent-gold)]"></span>
+  </div>
+  {subtitle && (
+    <p class="mt-4 text-[var(--color-text-muted)] max-w-xl mx-auto">{subtitle}</p>
+  )}
+</div>

@@ -1,0 +1,66 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  repo?: string;
+  url?: string;
+  status: 'active' | 'archived' | 'placeholder';
+}
+
+const { title, description, tags, repo, url, status } = Astro.props;
+const isPlaceholder = status === 'placeholder';
+---
+
+<article
+  class:list={[
+    'relative rounded border p-6 flex flex-col gap-4 transition-colors duration-200',
+    isPlaceholder
+      ? 'border-dashed border-[var(--color-border)] bg-[var(--color-surface)]/40 opacity-60'
+      : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent-gold)]',
+  ]}
+>
+  {isPlaceholder && (
+    <div class="absolute top-3 right-3 text-xs font-heading text-[var(--color-accent-gold)] tracking-widest uppercase">
+      Soon
+    </div>
+  )}
+
+  <div>
+    <h3 class="font-heading text-lg font-semibold text-[var(--color-text)]">{title}</h3>
+    <p class="mt-1 text-sm text-[var(--color-text-muted)]">{description}</p>
+  </div>
+
+  <div class="flex flex-wrap gap-2">
+    {tags.map((tag) => (
+      <span class="rounded border border-[var(--color-border)] px-2 py-0.5 text-xs font-heading text-[var(--color-text-muted)] tracking-wide">
+        {tag}
+      </span>
+    ))}
+  </div>
+
+  {!isPlaceholder && (
+    <div class="flex gap-3 mt-auto">
+      {repo && (
+        <a
+          href={repo}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs font-heading tracking-widest uppercase text-[var(--color-accent-gold)] hover:text-[var(--color-text)] transition-colors"
+        >
+          GitHub →
+        </a>
+      )}
+      {url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs font-heading tracking-widest uppercase text-[var(--color-accent-gold)] hover:text-[var(--color-text)] transition-colors"
+        >
+          Live →
+        </a>
+      )}
+    </div>
+  )}
+</article>

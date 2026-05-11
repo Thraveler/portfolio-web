@@ -1,0 +1,71 @@
+---
+---
+
+<section class="relative flex min-h-screen flex-col items-center justify-center px-6 py-24 text-center">
+  <!-- Subtle radial glow -->
+  <div
+    class="pointer-events-none absolute inset-0 flex items-center justify-center"
+    aria-hidden="true"
+  >
+    <div
+      class="h-[500px] w-[500px] rounded-full"
+      style="background: radial-gradient(circle, rgba(201,5,17,0.08) 0%, transparent 70%);"
+    ></div>
+  </div>
+
+  <!-- Profile image placeholder -->
+  <div class="relative mb-8">
+    <div
+      class="h-36 w-36 rounded-full border-2 border-[var(--color-accent-gold)] bg-[var(--color-surface)] flex items-center justify-center overflow-hidden"
+    >
+      <!-- Replace with <img> when you have a photo -->
+      <span class="text-5xl text-[var(--color-text-muted)]">YN</span>
+    </div>
+    <!-- Gold ring decoration -->
+    <div
+      class="absolute -inset-2 rounded-full border border-[var(--color-border)]"
+      aria-hidden="true"
+    ></div>
+  </div>
+
+  <!-- Name -->
+  <h1 class="font-display text-4xl text-[var(--color-text)] md:text-6xl">
+    Your Name
+  </h1>
+
+  <!-- Divider -->
+  <div class="mt-4 flex items-center justify-center gap-3">
+    <span class="h-px w-12 bg-[var(--color-accent-gold)]"></span>
+    <span class="font-heading text-xs tracking-[0.3em] uppercase text-[var(--color-accent-gold)]">
+      Software Engineer
+    </span>
+    <span class="h-px w-12 bg-[var(--color-accent-gold)]"></span>
+  </div>
+
+  <!-- Tagline -->
+  <p class="mt-6 max-w-md text-lg text-[var(--color-text-muted)] leading-relaxed">
+    Building things for the web — from the frontier of fullstack to the edge of AI.
+  </p>
+
+  <!-- CTAs -->
+  <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+    <a
+      href="#projects"
+      class="rounded border border-[var(--color-accent-gold)] bg-[var(--color-accent-gold)] px-6 py-2.5 font-heading text-sm tracking-widest uppercase text-[var(--color-bg)] transition-colors hover:bg-transparent hover:text-[var(--color-accent-gold)]"
+    >
+      View Work
+    </a>
+    <a
+      href="#contact"
+      class="font-heading text-sm tracking-widest uppercase text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]"
+    >
+      Get in Touch →
+    </a>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+    <span class="text-xs font-heading tracking-widest uppercase text-[var(--color-text-muted)] opacity-50">Scroll</span>
+    <div class="h-8 w-px bg-[var(--color-border)]"></div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+
+const links = [
+  {
+    label: 'Email',
+    href: 'mailto:your@email.com',
+    display: 'your@email.com',
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/yourusername',
+    display: 'github.com/yourusername',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/yourusername',
+    display: 'linkedin.com/in/yourusername',
+  },
+];
+---
+
+<section id="contact" class="px-6 py-24">
+  <div class="mx-auto max-w-lg text-center">
+    <SectionHeader
+      title="Contact"
+      subtitle="Have a project in mind or just want to talk? Reach out."
+    />
+
+    <div class="mt-8 space-y-4">
+      {links.map(({ label, href, display }) => (
+        <a
+          href={href}
+          target={href.startsWith('mailto') ? undefined : '_blank'}
+          rel="noopener noreferrer"
+          class="flex items-center justify-between rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-4 transition-colors hover:border-[var(--color-accent-gold)] group"
+        >
+          <span class="font-heading text-xs tracking-widest uppercase text-[var(--color-accent-gold)]">
+            {label}
+          </span>
+          <span class="text-sm text-[var(--color-text-muted)] group-hover:text-[var(--color-text)] transition-colors">
+            {display}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

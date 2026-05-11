@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ProjectCard from '../ui/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<section id="projects" class="px-6 py-24">
+  <div class="mx-auto max-w-4xl">
+    <SectionHeader
+      title="Projects"
+      subtitle="A collection of things I've built. More on the way."
+    />
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          repo={project.data.repo}
+          url={project.data.url}
+          status={project.data.status}
+        />
+      ))}
+    </div>
+  </div>
+</section>
