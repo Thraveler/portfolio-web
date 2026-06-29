@@ -1,0 +1,89 @@
+---
+const links = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <!-- Logo / name -->
+    <a
+      href="#"
+      class="font-display text-sm text-[var(--color-accent-gold)] tracking-widest transition-opacity hover:opacity-75"
+    >
+      YN
+    </a>
+
+    <!-- Links -->
+    <ul class="flex items-center gap-8">
+      {links.map(({ label, href }) => (
+        <li>
+          <a
+            href={href}
+            data-nav-link
+            class="nav-link font-heading text-xs tracking-widest uppercase text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]"
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const navbar = document.getElementById('navbar')!;
+  const sections = document.querySelectorAll<HTMLElement>('section[id]');
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+
+  // Show background once user scrolls past the hero
+  function updateBackground() {
+    if (window.scrollY > 80) {
+      navbar.classList.add('nav-scrolled');
+    } else {
+      navbar.classList.remove('nav-scrolled');
+    }
+  }
+
+  // Highlight the link whose section occupies the center of the viewport
+  function updateActiveLink() {
+    const viewportMid = window.scrollY + window.innerHeight / 2;
+    let currentId = '';
+
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      if (viewportMid >= top && viewportMid < bottom) {
+        currentId = section.id;
+      }
+    });
+
+    navLinks.forEach((link) => {
+      const isActive = link.getAttribute('href') === `#${currentId}`;
+      link.classList.toggle('nav-link-active', isActive);
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    updateBackground();
+    updateActiveLink();
+  }, { passive: true });
+
+  updateBackground();
+  updateActiveLink();
+</script>
+
+<style>
+  #navbar.nav-scrolled {
+    background-color: color-mix(in srgb, var(--color-bg) 90%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-link-active {
+    color: var(--color-accent-gold);
+  }
+</style>
