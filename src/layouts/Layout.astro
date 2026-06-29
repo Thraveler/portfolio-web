@@ -8,9 +8,11 @@ interface Props {
 }
 
 const {
-  title = 'Your Name — Software Engineer',
-  description = 'Fullstack Software Engineer with a focus on web and AI.',
+  title = 'DM — Software Engineer',
+  description = 'Fullstack Software Engineer with a focus on web and AI. Building for the frontier of fullstack and the edge of AI.',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://thraveler.dev');
 ---
 
 <!doctype html>
@@ -19,6 +21,14 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
