@@ -17,8 +17,8 @@ const links = [
       YN
     </a>
 
-    <!-- Links -->
-    <ul class="flex items-center gap-8">
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-8">
       {links.map(({ label, href }) => (
         <li>
           <a
@@ -31,11 +31,45 @@ const links = [
         </li>
       ))}
     </ul>
+
+    <!-- Hamburger button (mobile only) -->
+    <button
+      id="menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      class="md:hidden flex flex-col justify-center gap-1.5 p-1"
+    >
+      <span class="hamburger-bar block h-px w-5 bg-[var(--color-text-muted)] transition-all duration-300 origin-center"></span>
+      <span class="hamburger-bar block h-px w-5 bg-[var(--color-text-muted)] transition-all duration-300"></span>
+      <span class="hamburger-bar block h-px w-5 bg-[var(--color-text-muted)] transition-all duration-300 origin-center"></span>
+    </button>
   </nav>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]"
+  >
+    <ul class="flex flex-col px-6 py-4 gap-5">
+      {links.map(({ label, href }) => (
+        <li>
+          <a
+            href={href}
+            data-nav-link
+            class="nav-link block font-heading text-xs tracking-widest uppercase text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]"
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </header>
 
 <script>
   const navbar = document.getElementById('navbar')!;
+  const menuToggle = document.getElementById('menu-toggle')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
   const sections = document.querySelectorAll<HTMLElement>('section[id]');
   const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
 
@@ -67,6 +101,23 @@ const links = [
     });
   }
 
+  // Toggle mobile menu open/closed
+  function toggleMenu(open: boolean) {
+    mobileMenu.classList.toggle('hidden', !open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.classList.toggle('menu-open', open);
+  }
+
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    toggleMenu(!isOpen);
+  });
+
+  // Close mobile menu when a link is clicked
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
   window.addEventListener('scroll', () => {
     updateBackground();
     updateActiveLink();
@@ -85,5 +136,16 @@ const links = [
 
   .nav-link-active {
     color: var(--color-accent-gold);
+  }
+
+  /* Hamburger → X animation */
+  #menu-toggle.menu-open .hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  #menu-toggle.menu-open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+  #menu-toggle.menu-open .hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 </style>

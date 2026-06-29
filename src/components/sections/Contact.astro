@@ -33,7 +33,7 @@ const links = [
           href={href}
           target={href.startsWith('mailto') ? undefined : '_blank'}
           rel="noopener noreferrer"
-          class="flex items-center justify-between rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-4 transition-colors hover:border-[var(--color-accent-gold)] group"
+          class="flex flex-col gap-1 rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-4 transition-colors hover:border-[var(--color-accent-gold)] group sm:flex-row sm:items-center sm:justify-between"
         >
           <span class="font-heading text-xs tracking-widest uppercase text-[var(--color-accent-gold)]">
             {label}
